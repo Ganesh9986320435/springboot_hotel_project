@@ -16,6 +16,16 @@ public class Room {
 	private String room_price;
 	private String no_of_beds;
 	private String max_no_of_people;
+	private String availability;
+	
+	public String getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(String availability) {
+		this.availability = availability;
+	}
+
 	private Floor floor;
 
 	@ManyToOne
