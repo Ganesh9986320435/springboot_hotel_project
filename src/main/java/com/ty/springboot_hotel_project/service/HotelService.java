@@ -25,6 +25,5 @@ public class HotelService {
 			structure.setData(hotel2);
 		}
 		return new ResponseEntity<ResponseStructure<Hotel>>(structure, HttpStatus.CREATED);
-
 	}
 }

@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.ty.springboot_hotel_project.dto.Customer;
 import com.ty.springboot_hotel_project.repository.CustomerRepository;
-import com.ty.springboot_hotel_project.repository.CustomerRepository;
-
 @Repository
 public class CustomerDao {
 	@Autowired
@@ -39,5 +37,4 @@ public class CustomerDao {
 	public List<Customer> getAllCustomers() {
 		return repository.findAll();
 	}
-
 }
