@@ -12,5 +12,5 @@ public interface BookingsRepository extends JpaRepository<Booking, Integer>{
 	@Query("select b from Booking b where b.check_out_date=?1")
 	public Booking getBookingByCheckOut(String check_out_date);
 	
-
+	
 }
