@@ -42,5 +42,6 @@ public class BookingDao {
 	public Booking getBookingByCheckOut(String check_out_date) {
 		return repository.getBookingByCheckOut(check_out_date);
 	}
+	
 
 }

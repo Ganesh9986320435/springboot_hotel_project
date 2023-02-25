@@ -43,7 +43,7 @@ public class RoomDao {
 		return repository.getRoomByNo(room_no);
 	}
 
-	public Room getRoomByAvailability(String availability) {
+	public List<Room> getRoomByAvailability(String availability) {
 		return repository.getRoomByAvailability(availability);
-	}
+}
 }

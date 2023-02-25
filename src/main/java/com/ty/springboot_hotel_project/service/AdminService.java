@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import com.ty.springboot_hotel_project.dao.AdminDao;
 import com.ty.springboot_hotel_project.dto.Admin;
 import com.ty.springboot_hotel_project.dto.Hotel;
+import com.ty.springboot_hotel_project.exception.AdminBodyNotFoundException;
+import com.ty.springboot_hotel_project.exception.AdminEmailNotFoundException;
+import com.ty.springboot_hotel_project.exception.AdminIdNotFoundException;
 import com.ty.springboot_hotel_project.util.ResponseStructure;
 
 @Service
@@ -39,6 +42,9 @@ public class AdminService {
 			structure.setData(adminDao.updatAdmin(admin2));
 			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.CREATED);
 		}
+		else {
+			throw new AdminIdNotFoundException();
+		}
 	}
 	
 	public ResponseEntity<ResponseStructure<Admin>> deleteAdmin(int aid) {
@@ -48,6 +54,9 @@ public class AdminService {
 			structure.setStatus(HttpStatus.CREATED.value());
 			structure.setData(adminDao.deleteAdmin(admin2));
 			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.CREATED);
+		}
+		else {
+			throw new AdminIdNotFoundException();
 		}
 	}
 	
@@ -59,6 +68,9 @@ public class AdminService {
 			structure.setData(admin2);
 			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.CREATED);
 		}
+		else {
+			throw new AdminIdNotFoundException();
+		}
 	}
 	
 	public ResponseEntity<ResponseStructure<Admin>> getAdminByEmail(String email) {
@@ -68,6 +80,10 @@ public class AdminService {
 			structure.setStatus(HttpStatus.CREATED.value());
 			structure.setData(admin2);
 			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.CREATED);
+		}
+		else {
+			throw new AdminEmailNotFoundException();
+
 		}
 	}
 	
@@ -79,7 +95,13 @@ public class AdminService {
 			responseStructure.setData(adminDao.getAllAdmins());
 			return new ResponseEntity<ResponseStructure<List<Admin>>>(responseStructure, HttpStatus.CREATED);
 		}
+		else {
+			throw new AdminBodyNotFoundException();
+		}
 	}
+	
+	
+	
 
 
 

@@ -1,5 +1,6 @@
 package com.ty.springboot_hotel_project.dto;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,14 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String check_in_date;
-	private String check_out_date;
+	private Date check_in_date;
+	private Date check_out_date;
 	private String check_in_time;
 	private String check_out_time;
 	private String no_of_people;
@@ -23,8 +25,8 @@ public class Booking {
 	@ManyToOne
 	private Customer customer;
 
-	@OneToMany
-	private List<Room> rooms;
+	@OneToOne
+	private Room rooms;
 
 	public int getId() {
 		return id;
@@ -34,21 +36,7 @@ public class Booking {
 		this.id = id;
 	}
 
-	public String getCheck_in_date() {
-		return check_in_date;
-	}
-
-	public void setCheck_in_date(String check_in_date) {
-		this.check_in_date = check_in_date;
-	}
-
-	public String getCheck_out_date() {
-		return check_out_date;
-	}
-
-	public void setCheck_out_date(String check_out_date) {
-		this.check_out_date = check_out_date;
-	}
+	
 
 	public String getCheck_in_time() {
 		return check_in_time;
@@ -82,13 +70,31 @@ public class Booking {
 		this.customer = customer;
 	}
 
-	public List<Room> getRooms() {
+	public Room getRooms() {
 		return rooms;
 	}
 
-	public void setRooms(List<Room> rooms) {
+	public void setRooms(Room rooms) {
 		this.rooms = rooms;
 	}
+
+	public Date getCheck_in_date() {
+		return check_in_date;
+	}
+
+	public void setCheck_in_date(Date check_in_date) {
+		this.check_in_date = check_in_date;
+	}
+
+	public Date getCheck_out_date() {
+		return check_out_date;
+	}
+
+	public void setCheck_out_date(Date check_out_date) {
+		this.check_out_date = check_out_date;
+	}
+	
+	
 	
 	
 

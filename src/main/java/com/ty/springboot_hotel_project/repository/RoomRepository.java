@@ -1,5 +1,7 @@
 package com.ty.springboot_hotel_project.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,7 +16,7 @@ public interface RoomRepository extends JpaRepository<Room, Integer>{
 	public Room getRoomByNo(String room_no);
 	
 	@Query("select r from Room r where r.availability=?1")
-	public Room getRoomByAvailability(String availability);
+	public List<Room> getRoomByAvailability(String availability);
 			
 	
 }
