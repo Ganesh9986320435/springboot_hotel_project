@@ -48,4 +48,9 @@ public class CustomerController {
 	public ResponseEntity<ResponseStructure<List<Customer>>> getAllCustomer() {
 		return service.getCustomers();
 	}
+	
+	@GetMapping("/customerbyemail")
+	public ResponseEntity<ResponseStructure<Customer>> getCustomerByEmail(@RequestParam String email){
+		return service.getCustomerByEmail(email);
+	}
 }

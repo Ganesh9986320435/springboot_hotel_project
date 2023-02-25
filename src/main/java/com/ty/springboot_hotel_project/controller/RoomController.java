@@ -52,17 +52,17 @@ public class RoomController {
 	}
 	
 	@GetMapping("/roombytype")
-	public ResponseEntity<ResponseStructure<Room>> getRoomByType(String room_type){
+	public ResponseEntity<ResponseStructure<Room>> getRoomByType(@RequestParam String room_type){
 		return service.getRoomByType(room_type);
 	}
 	
 	@GetMapping("/roombyno")
-	public ResponseEntity<ResponseStructure<Room>> getRoomByNo(String room_no){
+	public ResponseEntity<ResponseStructure<Room>> getRoomByNo(@RequestParam String room_no){
 		return service.getRoomByNo(room_no);
 	}
 	
 	@GetMapping("/roombyavailability")
-	public ResponseEntity<ResponseStructure<List<Room>>> getRoomByAvailability(String availability) {
+	public ResponseEntity<ResponseStructure<List<Room>>> getRoomByAvailability(@RequestParam String availability) {
 		return service.getRoomByAvailability(availability);
 	}
 	

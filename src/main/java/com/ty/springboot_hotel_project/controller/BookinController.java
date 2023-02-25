@@ -52,7 +52,7 @@ public class BookinController {
 	}
 	
 	@GetMapping("/bookingsbycheck")
-	public ResponseEntity<ResponseStructure<List<Room>>> getRoomsByCheckOutAndCheckIn(Date check_in,Date check_out){
+	public ResponseEntity<ResponseStructure<List<Room>>> getRoomsByCheckOutAndCheckIn(@RequestParam Date check_in,@RequestParam Date check_out){
 		return service.getRoomsByCheckOutAndCheckIn(check_in, check_out);
 	}
 	
