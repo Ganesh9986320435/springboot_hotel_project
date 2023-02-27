@@ -1,6 +1,8 @@
 package com.ty.springboot_hotel_project.dto;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +20,12 @@ public class Room {
 	private String max_no_of_people;
 	private String availability;
 	
+	@Enumerated(EnumType.STRING)
+	private Floor floor;
+
+	@ManyToOne
+	private Hotel hotel;
+	
 	public String getAvailability() {
 		return availability;
 	}
@@ -25,11 +33,6 @@ public class Room {
 	public void setAvailability(String availability) {
 		this.availability = availability;
 	}
-
-	private Floor floor;
-
-	@ManyToOne
-	private Hotel hotel;
 
 	public int getId() {
 		return id;

@@ -21,7 +21,7 @@ import com.ty.springboot_hotel_project.util.ResponseStructure;
 
 
 @RestController
-public class BookinController {
+public class BookingController {
 	
 	@Autowired
 	private BookingService service;

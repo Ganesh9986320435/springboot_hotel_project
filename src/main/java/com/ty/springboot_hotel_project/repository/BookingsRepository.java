@@ -14,10 +14,10 @@ public interface BookingsRepository extends JpaRepository<Booking, Integer>{
 	@Query("select b from Booking b where b.check_out_date=?1")
 	public Booking getBookingByCheckOut(String check_out_date);
 	
-	@Query("select b from Booking b where b.cus_chek_in_date=?1 between(b.check_in_date=?2,b.check_out_date=?3)")
-	public Booking getBookingByCheckInByCustomer(Date cus_chek_in_date,Date check_in_date,Date check_out_date);
-	
-	@Query("select b from Booking b where b.cus_chek_out_date=?1 between(b.check_in_date=?2,b.check_out_date=?3)")
-	public Booking getBookingByCheckOutByCustomer(Date cus_chek_out_date,Date check_in_date,Date check_out_date);
+//	@Query("select b from Booking b where b.chek_in_date=?1 between b.check_in_date=?2 and b.check_out_date=?3")
+//	public Booking getBookingByCheckInByCustomer(Date chek_in_date,Date check_in_date,Date check_out_date);
+//	
+//	@Query("select b from Booking b where b.chek_out_date=?1 between b.check_in_date=?2 and b.check_out_date=?3")
+//	public Booking getBookingByCheckOutByCustomer(Date chek_out_date,Date check_in_date,Date check_out_date);
 	
 }

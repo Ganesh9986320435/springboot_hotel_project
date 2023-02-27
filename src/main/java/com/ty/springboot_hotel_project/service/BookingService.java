@@ -106,9 +106,9 @@ public class BookingService {
 		{
 			if(b.getRooms().getAvailability().equals("N"))
 			{
-				Booking b1=Repository.getBookingByCheckInByCustomer(check_in, b.getCheck_in_date(), b.getCheck_out_date());
-				Booking b2=Repository.getBookingByCheckOutByCustomer(check_out, b.getCheck_in_date(), b.getCheck_out_date());
-				if(b1==null&&b2==null)
+//				Booking b1=Repository.getBookingByCheckInByCustomer(check_in, b.getCheck_in_date(), b.getCheck_out_date());
+//				Booking b2=Repository.getBookingByCheckOutByCustomer(check_out, b.getCheck_in_date(), b.getCheck_out_date());
+//				if(b1==null&&b2==null)
 				{
 					list2.add(b.getRooms());
 				}
