@@ -37,7 +37,7 @@ public class HotelService {
 			hotel.setHotel_id(hid);
 			structure.setMessage("Hotel Updated Successufully....");
 			structure.setStatus(HttpStatus.OK.value());
-			structure.setData(hotelDao.updateHotel(hotel2));
+			structure.setData(hotelDao.updateHotel(hotel));
 			return new ResponseEntity<ResponseStructure<Hotel>>(structure, HttpStatus.OK);
 		} else {
 			throw new HotelIdNotFoundException();
