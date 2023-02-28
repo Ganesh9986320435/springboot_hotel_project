@@ -10,6 +10,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.UnexpectedTypeException;
 
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -188,6 +189,16 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		ResponseStructure<String> structure = new ResponseStructure<>();
 		structure.setMessage("Validate Only String Type Atrribute");
 		structure.setData("Validate Only String Type Atrribute");
+		structure.setStatus(HttpStatus.BAD_REQUEST.value());
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(IncorrectResultSizeDataAccessException.class)
+	public ResponseEntity<ResponseStructure<String>> IncorrectResultSizeDataAccessExceptionhandler(IncorrectResultSizeDataAccessException accessException)
+	{
+		ResponseStructure<String> structure = new ResponseStructure<>();
+		structure.setMessage(accessException.getMessage());
+		structure.setData(accessException.getLocalizedMessage());
 		structure.setStatus(HttpStatus.BAD_REQUEST.value());
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.BAD_REQUEST);
 	}

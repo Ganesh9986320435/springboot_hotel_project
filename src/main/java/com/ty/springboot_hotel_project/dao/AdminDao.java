@@ -28,7 +28,14 @@ public class AdminDao {
 	}
 
 	public Admin getAdminById(int aid) {
-		return repository.findById(aid).get();
+		
+		if(repository.findById(aid).isPresent())
+		{
+			return repository.findById(aid).get();
+
+		}
+		
+		return null;
 	}
 
 	public List<Admin> getAllAdmins() {
