@@ -4,8 +4,6 @@ import java.util.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -105,7 +103,9 @@ public class BookingService {
 
 		}
 	}
-	public ResponseEntity<ResponseStructure<List<Room>>> getRoomsByCheckOutAndCheckIn(String check_in, String check_out) throws ParseException  {
+
+	public ResponseEntity<ResponseStructure<List<Room>>> getRoomsByCheckOutAndCheckIn(String check_in, String check_out)
+			throws ParseException {
 		List<Room> sendList = new ArrayList<>();
 		List<Room> list = roomDao.getRoomByAvailability("Y");
 		for (Room r : list) {
@@ -113,18 +113,22 @@ public class BookingService {
 		}
 		List<Booking> list2 = bookingDao.getAllBookings();
 		for (Booking b : list2) {
-			String rci = b.getCheck_in_date();
-			String rco = b.getCheck_out_date();
-			Date fdate = new SimpleDateFormat("YYYY-MM-DD").parse(rci);
-			Date tdate = new SimpleDateFormat("YYYY-MM-DD").parse(rco);
-			long t1 = fdate.getTime();
-			long t2 = tdate.getTime();
+			String from = b.getCheck_in_date();
+			String to = b.getCheck_out_date();
+
+			Date d_from = new SimpleDateFormat("yyyy-MM-dd").parse(from);
+			Date d_to = new SimpleDateFormat("yyyy-MM-dd").parse(to);
+
+			// System.out.println(d_from.getTime());
+
+			long t1 = d_from.getTime();
+			long t2 = d_to.getTime();
 
 			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
 
 			if (t1 < t2) {
-				// 1 = 1000
 				int count = 0;
+				// 1 = 1000
 				for (long i = t1; i <= t2; i += 86400000) {
 					if (f.format(i).equals(check_in) || f.format(i).equals(check_out))
 						count++;
@@ -134,6 +138,7 @@ public class BookingService {
 				}
 			}
 		}
+
 		ResponseStructure<List<Room>> responseStructure = new ResponseStructure<>();
 		responseStructure.setMessage("Rooms feted Successufully....");
 		responseStructure.setStatus(HttpStatus.OK.value());
