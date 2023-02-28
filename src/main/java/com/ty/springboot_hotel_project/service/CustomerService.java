@@ -101,4 +101,21 @@ public class CustomerService {
 		}
 	}
 
+	public ResponseEntity<ResponseStructure<Customer>> loginCustomer(String email, String password) {
+		Customer customer=customerDao.getCustomerByEmail(email);
+		ResponseStructure<Customer> responseStructure=new ResponseStructure<>();
+		if(customer.getCustomer_password().equals(password)&&customer.getCustomer_role().equals("customer"))
+		{
+			responseStructure.setMessage("customers feted Successufully....");
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setData(customer);
+			return new ResponseEntity<ResponseStructure<Customer>>(responseStructure, HttpStatus.OK);
+		}
+		else {
+			responseStructure.setMessage("enter valid email and password....");
+			responseStructure.setStatus(HttpStatus.BAD_REQUEST.value());
+			responseStructure.setData(null);
+			return new ResponseEntity<ResponseStructure<Customer>>(responseStructure, HttpStatus.BAD_REQUEST);
+		}
+	}
 }

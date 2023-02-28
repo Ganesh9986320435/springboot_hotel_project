@@ -53,4 +53,15 @@ public class CustomerController {
 	public ResponseEntity<ResponseStructure<Customer>> getCustomerByEmail(@RequestParam String email){
 		return service.getCustomerByEmail(email);
 	}
+	
+	@GetMapping("/customerlogin")
+	public ResponseEntity<ResponseStructure<Customer>> loginCustomer(String email,String password)
+	{
+		return service.loginCustomer(email,password);
+	}
+	
+	
+	
+	
+	
 }
