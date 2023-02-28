@@ -30,18 +30,18 @@ public class CustomerController {
 	}
 
 	@PutMapping("/customer")
-	public ResponseEntity<ResponseStructure<Customer>> updateCustomer(@RequestParam int hid, @RequestBody Customer customer) {
-		return service.updateCustomer(hid, customer);
+	public ResponseEntity<ResponseStructure<Customer>> updateCustomer(@RequestParam int cid, @RequestBody Customer customer) {
+		return service.updateCustomer(cid, customer);
 	}
 
 	@DeleteMapping("/customer")
-	public ResponseEntity<ResponseStructure<Customer>> deleteCustomer(@RequestParam int hid) {
-		return service.deleteCustomer(hid);
+	public ResponseEntity<ResponseStructure<Customer>> deleteCustomer(@RequestParam int cid) {
+		return service.deleteCustomer(cid);
 	}
 
 	@GetMapping("/customer")
-	public ResponseEntity<ResponseStructure<Customer>> getCustomerById(@RequestParam int hid) {
-		return service.getCustomerById(hid);
+	public ResponseEntity<ResponseStructure<Customer>> getCustomerById(@RequestParam int cid) {
+		return service.getCustomerById(cid);
 	}
 
 	@GetMapping("/customers")

@@ -28,7 +28,11 @@ public class BookingDao {
 	}
 
 	public Booking getBookingById(int bid) {
-		return repository.findById(bid).get();
+		if (repository.findById(bid).isPresent())
+			return repository.findById(bid).get();
+		else
+			return null;
+
 	}
 
 	public List<Booking> getAllBookings() {
@@ -36,12 +40,17 @@ public class BookingDao {
 	}
 
 	public Booking getBookingByCheckIn(String check_in_date) {
-		return repository.getBookingByCheckIn(check_in_date);
+		if (repository.getBookingByCheckIn(check_in_date) != null)
+			return repository.getBookingByCheckIn(check_in_date);
+		else
+			return null;
 	}
 
 	public Booking getBookingByCheckOut(String check_out_date) {
-		return repository.getBookingByCheckOut(check_out_date);
+		if (repository.getBookingByCheckOut(check_out_date) != null)
+			return repository.getBookingByCheckOut(check_out_date);
+		else
+			return null;
 	}
-	
 
 }

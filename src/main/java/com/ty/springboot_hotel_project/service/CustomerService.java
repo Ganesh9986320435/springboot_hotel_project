@@ -33,13 +33,13 @@ public class CustomerService {
 		return new ResponseEntity<ResponseStructure<Customer>>(structure, HttpStatus.CREATED);
 	}
 	
-	public ResponseEntity<ResponseStructure<Customer>> updateCustomer(int aid,Customer customer) {
-		Customer customer2 = customerDao.getCustomerById(aid);
+	public ResponseEntity<ResponseStructure<Customer>> updateCustomer(int cid,Customer customer) {
+		Customer customer2 = customerDao.getCustomerById(cid);
 		if (customer2 != null) {
-			customer.setCustomer_id(aid);
+			customer.setCustomer_id(cid);
 			structure.setMessage("customer updated Successufully....");
 			structure.setStatus(HttpStatus.CREATED.value());
-			structure.setData(customerDao.updateCustomer(customer2));
+			structure.setData(customerDao.updateCustomer(customer));
 			return new ResponseEntity<ResponseStructure<Customer>>(structure, HttpStatus.CREATED);
 		}
 		else {
@@ -48,8 +48,8 @@ public class CustomerService {
 		}
 	}
 	
-	public ResponseEntity<ResponseStructure<Customer>> deleteCustomer(int aid) {
-		Customer customer2 = customerDao.getCustomerById(aid);
+	public ResponseEntity<ResponseStructure<Customer>> deleteCustomer(int cid) {
+		Customer customer2 = customerDao.getCustomerById(cid);
 		if (customer2 != null) {
 			structure.setMessage("customer deleted Successufully....");
 			structure.setStatus(HttpStatus.CREATED.value());
@@ -62,8 +62,8 @@ public class CustomerService {
 		}
 	}
 	
-	public ResponseEntity<ResponseStructure<Customer>> getCustomerById(int aid) {
-		Customer customer2 = customerDao.getCustomerById(aid);
+	public ResponseEntity<ResponseStructure<Customer>> getCustomerById(int cid) {
+		Customer customer2 = customerDao.getCustomerById(cid);
 		if (customer2 != null) {
 			structure.setMessage("customer fetched Successufully....");
 			structure.setStatus(HttpStatus.CREATED.value());

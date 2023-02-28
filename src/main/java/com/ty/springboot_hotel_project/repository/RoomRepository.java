@@ -10,7 +10,7 @@ import com.ty.springboot_hotel_project.dto.Room;
 public interface RoomRepository extends JpaRepository<Room, Integer>{
 	
 	@Query("select r from Room r where r.room_type=?1")
-	public Room getRoomByType(String room_type);
+	public List<Room> getRoomByType(String room_type);
 	
 	@Query("select r from Room r where r.room_no=?1")
 	public Room getRoomByNo(String room_no);

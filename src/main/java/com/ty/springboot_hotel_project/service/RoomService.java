@@ -82,13 +82,14 @@ public class RoomService {
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<Room>> getRoomByType(String room_type) {
-		Room room2 = roomDao.getRoomByType(room_type);
+	public ResponseEntity<ResponseStructure<List<Room>>> getRoomByType(String room_type) {
+		List<Room> room2 = roomDao.getRoomByType(room_type);
 		if (room2 != null) {
+			ResponseStructure<List<Room>> structure = new ResponseStructure<>();
 			structure.setMessage("Room fetched Successufully....");
 			structure.setStatus(HttpStatus.CREATED.value());
 			structure.setData(room2);
-			return new ResponseEntity<ResponseStructure<Room>>(structure, HttpStatus.CREATED);
+			return new ResponseEntity<ResponseStructure<List<Room>>>(structure, HttpStatus.CREATED);
 		} else {
 			throw new RoomTypeNotFoundException();
 

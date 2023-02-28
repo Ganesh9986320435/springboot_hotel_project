@@ -52,7 +52,7 @@ public class RoomController {
 	}
 	
 	@GetMapping("/roombytype")
-	public ResponseEntity<ResponseStructure<Room>> getRoomByType(@RequestParam String room_type){
+	public ResponseEntity<ResponseStructure<List<Room>>> getRoomByType(@RequestParam String room_type){
 		return service.getRoomByType(room_type);
 	}
 	
