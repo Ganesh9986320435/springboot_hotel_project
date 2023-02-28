@@ -1,6 +1,7 @@
 package com.ty.springboot_hotel_project.controller;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,11 +53,7 @@ public class BookingController {
 	}
 	
 	@GetMapping("/bookingsbycheck")
-	public ResponseEntity<ResponseStructure<List<Room>>> getRoomsByCheckOutAndCheckIn(@RequestParam Date check_in,@RequestParam Date check_out){
+	public ResponseEntity<ResponseStructure<List<Room>>> getRoomsByCheckOutAndCheckIn(@RequestParam String check_in,@RequestParam String check_out){
 		return service.getRoomsByCheckOutAndCheckIn(check_in, check_out);
 	}
-	
-	
-	
-	
 }

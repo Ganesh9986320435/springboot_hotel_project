@@ -16,8 +16,8 @@ public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private Date check_in_date;
-	private Date check_out_date;
+	private String check_in_date;
+	private String check_out_date;
 	private String check_in_time;
 	private String check_out_time;
 	private String no_of_people;
@@ -78,19 +78,19 @@ public class Booking {
 		this.rooms = rooms;
 	}
 
-	public Date getCheck_in_date() {
+	public String getCheck_in_date() {
 		return check_in_date;
 	}
 
-	public void setCheck_in_date(Date check_in_date) {
+	public void setCheck_in_date(String check_in_date) {
 		this.check_in_date = check_in_date;
 	}
 
-	public Date getCheck_out_date() {
+	public String getCheck_out_date() {
 		return check_out_date;
 	}
 
-	public void setCheck_out_date(Date check_out_date) {
+	public void setCheck_out_date(String check_out_date) {
 		this.check_out_date = check_out_date;
 	}
 	
