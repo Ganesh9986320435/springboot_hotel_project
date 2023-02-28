@@ -15,11 +15,9 @@ import com.ty.springboot_hotel_project.dao.RoomDao;
 import com.ty.springboot_hotel_project.dto.Booking;
 import com.ty.springboot_hotel_project.dto.Customer;
 import com.ty.springboot_hotel_project.dto.Room;
-import com.ty.springboot_hotel_project.exception.AdminIdNotFoundException;
 import com.ty.springboot_hotel_project.exception.BookingBodyNotFoundException;
 import com.ty.springboot_hotel_project.exception.BookingIdNotFoundException;
 import com.ty.springboot_hotel_project.repository.BookingsRepository;
-import com.ty.springboot_hotel_project.repository.RoomRepository;
 import com.ty.springboot_hotel_project.util.ResponseStructure;
 
 @Service
@@ -51,15 +49,15 @@ public class BookingService {
 		return new ResponseEntity<ResponseStructure<Booking>>(structure, HttpStatus.CREATED);
 	}
 	
-	public ResponseEntity<ResponseStructure<Booking>> updateBooking(int aid,Booking booking) {
+	public ResponseEntity<ResponseStructure<Booking>> updateBooking(int bid,Booking booking) {
 		
 		
-		Booking booking2 = bookingDao.getBookingById(aid);
+		Booking booking2 = bookingDao.getBookingById(bid);
 		booking.setCustomer(booking2.getCustomer());
 		booking.setRooms(booking2.getRooms());
 		if (booking2 != null) {
-			booking.setId(aid);
-			structure.setMessage("booking Saved Successufully....");
+			booking.setId(bid);
+			structure.setMessage("booking Updated Successufully....");
 			structure.setStatus(HttpStatus.CREATED.value());
 			structure.setData(bookingDao.updatBooking(booking2));
 			return new ResponseEntity<ResponseStructure<Booking>>(structure, HttpStatus.CREATED);
@@ -70,8 +68,8 @@ public class BookingService {
 		}
 	}
 	
-	public ResponseEntity<ResponseStructure<Booking>> deleteBooking(int aid) {
-		Booking booking2 = bookingDao.getBookingById(aid);
+	public ResponseEntity<ResponseStructure<Booking>> deleteBooking(int bid) {
+		Booking booking2 = bookingDao.getBookingById(bid);
 		if (booking2 != null) {
 			structure.setMessage("booking deleted Successufully....");
 			structure.setStatus(HttpStatus.CREATED.value());
@@ -83,8 +81,8 @@ public class BookingService {
 		}
 	}
 	
-	public ResponseEntity<ResponseStructure<Booking>> getBookingById(int aid) {
-		Booking booking2 = bookingDao.getBookingById(aid);
+	public ResponseEntity<ResponseStructure<Booking>> getBookingById(int bid) {
+		Booking booking2 = bookingDao.getBookingById(bid);
 		if (booking2 != null) {
 			structure.setMessage("booking fetched Successufully....");
 			structure.setStatus(HttpStatus.CREATED.value());

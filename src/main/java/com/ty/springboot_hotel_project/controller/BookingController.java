@@ -32,18 +32,18 @@ public class BookingController {
 	}
 
 	@PutMapping("/booking")
-	public ResponseEntity<ResponseStructure<Booking>> updateBooking(@RequestParam int hid, @RequestBody Booking booking  ) {
-		return service.updateBooking(hid, booking);
+	public ResponseEntity<ResponseStructure<Booking>> updateBooking(@RequestParam int bid, @RequestBody Booking booking  ) {
+		return service.updateBooking(bid, booking);
 	}
 
 	@DeleteMapping("/booking")
-	public ResponseEntity<ResponseStructure<Booking>> deleteBooking(@RequestParam int hid) {
-		return service.deleteBooking(hid);
+	public ResponseEntity<ResponseStructure<Booking>> deleteBooking(@RequestParam int bid) {
+		return service.deleteBooking(bid);
 	}
 
 	@GetMapping("/booking")
-	public ResponseEntity<ResponseStructure<Booking>> getBookingById(@RequestParam int hid) {
-		return service.getBookingById(hid);
+	public ResponseEntity<ResponseStructure<Booking>> getBookingById(@RequestParam int bid) {
+		return service.getBookingById(bid);
 	}
 
 	@GetMapping("/bookings")
