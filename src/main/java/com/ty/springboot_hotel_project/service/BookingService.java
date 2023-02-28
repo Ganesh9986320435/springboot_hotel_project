@@ -38,9 +38,11 @@ public class BookingService {
 
 	public ResponseEntity<ResponseStructure<Booking>> saveBooking(Booking booking, int cid, int rid) {
 		Room room = roomDao.getRoomById(rid);
+		room.setAvailability("N");
+		Room room2=roomDao.updatRoom(room);
 		Customer customer = customerDao.getCustomerById(rid);
 		booking.setCustomer(customer);
-		booking.setRooms(room);
+		booking.setRooms(room2);
 		Booking booking2 = bookingDao.saveBooking(booking);
 		if (booking2 != null) {
 			structure.setMessage("booking Saved Successufully....");
