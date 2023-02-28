@@ -27,12 +27,12 @@ public class BookingController {
 	private BookingService service;
 
 	@PostMapping("/booking")
-	public ResponseEntity<ResponseStructure<Booking>> saveBooking(@RequestBody Booking booking) {
-		return service.saveBooking(booking);
+	public ResponseEntity<ResponseStructure<Booking>> saveBooking(@RequestBody Booking booking,@RequestParam int cid, @RequestParam int rid) {
+		return service.saveBooking(booking,cid,rid);
 	}
 
 	@PutMapping("/booking")
-	public ResponseEntity<ResponseStructure<Booking>> updateBooking(@RequestParam int hid, @RequestBody Booking booking) {
+	public ResponseEntity<ResponseStructure<Booking>> updateBooking(@RequestParam int hid, @RequestBody Booking booking  ) {
 		return service.updateBooking(hid, booking);
 	}
 

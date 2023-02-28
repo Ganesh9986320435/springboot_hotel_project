@@ -10,8 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ty.springboot_hotel_project.dao.BookingDao;
+import com.ty.springboot_hotel_project.dao.CustomerDao;
 import com.ty.springboot_hotel_project.dao.RoomDao;
 import com.ty.springboot_hotel_project.dto.Booking;
+import com.ty.springboot_hotel_project.dto.Customer;
 import com.ty.springboot_hotel_project.dto.Room;
 import com.ty.springboot_hotel_project.exception.AdminIdNotFoundException;
 import com.ty.springboot_hotel_project.exception.BookingBodyNotFoundException;
@@ -30,10 +32,16 @@ public class BookingService {
 	private RoomDao roomDao;
 	@Autowired
 	private BookingsRepository Repository;
+	@Autowired
+	private CustomerDao customerDao;
 	
 	ResponseStructure<Booking> structure = new ResponseStructure<>();
 
-	public ResponseEntity<ResponseStructure<Booking>> saveBooking(Booking booking) {
+	public ResponseEntity<ResponseStructure<Booking>> saveBooking(Booking booking,int cid,int rid) {
+		Room room=roomDao.getRoomById(rid);
+		Customer customer=customerDao.getCustomerById(rid);
+		booking.setCustomer(customer);
+		booking.setRooms(room);
 		Booking booking2 = bookingDao.saveBooking(booking);
 		if (booking2 != null) {
 			structure.setMessage("booking Saved Successufully....");
@@ -44,7 +52,11 @@ public class BookingService {
 	}
 	
 	public ResponseEntity<ResponseStructure<Booking>> updateBooking(int aid,Booking booking) {
+		
+		
 		Booking booking2 = bookingDao.getBookingById(aid);
+		booking.setCustomer(booking2.getCustomer());
+		booking.setRooms(booking2.getRooms());
 		if (booking2 != null) {
 			booking.setId(aid);
 			structure.setMessage("booking Saved Successufully....");

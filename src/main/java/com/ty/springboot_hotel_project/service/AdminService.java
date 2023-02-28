@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ty.springboot_hotel_project.dao.AdminDao;
+import com.ty.springboot_hotel_project.dao.HotelDao;
 import com.ty.springboot_hotel_project.dto.Admin;
 import com.ty.springboot_hotel_project.dto.Hotel;
 import com.ty.springboot_hotel_project.exception.AdminBodyNotFoundException;
@@ -21,9 +22,14 @@ public class AdminService {
 	@Autowired
 	private AdminDao adminDao;
 	
+	@Autowired
+	private HotelDao hotelDao;
+	
 	ResponseStructure<Admin> structure = new ResponseStructure<>();
 
-	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin admin) {
+	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin admin,int hid) {
+		Hotel hotel=hotelDao.getHotelById(hid);
+		admin.setHotel(hotel);
 		Admin admin2 = adminDao.saveAdmin(admin);
 		if (admin2 != null) {
 			structure.setMessage("admin Saved Successufully....");
@@ -35,11 +41,12 @@ public class AdminService {
 	
 	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(int aid,Admin admin) {
 		Admin admin2 = adminDao.getAdminById(aid);
+		admin.setHotel(admin2.getHotel());
 		if (admin2 != null) {
 			admin.setAdmin_id(aid);
-			structure.setMessage("admin Saved Successufully....");
+			structure.setMessage("admin updated Successufully....");
 			structure.setStatus(HttpStatus.CREATED.value());
-			structure.setData(adminDao.updatAdmin(admin2));
+			structure.setData(adminDao.updatAdmin(admin));
 			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.CREATED);
 		}
 		else {

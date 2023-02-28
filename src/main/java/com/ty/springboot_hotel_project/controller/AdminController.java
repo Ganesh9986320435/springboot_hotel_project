@@ -23,8 +23,8 @@ public class AdminController {
 	private AdminService service;
 
 	@PostMapping("/admin")
-	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(@RequestBody Admin admin) {
-		return service.saveAdmin(admin);
+	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(@RequestBody Admin admin,@RequestParam int hid) {
+		return service.saveAdmin(admin,hid);
 	}
 
 	@PutMapping("/admin")
