@@ -18,17 +18,17 @@ import com.ty.springboot_hotel_project.util.ResponseStructure;
 
 @Service
 public class AdminService {
-	
+
 	@Autowired
 	private AdminDao adminDao;
-	
+
 	@Autowired
 	private HotelDao hotelDao;
-	
+
 	ResponseStructure<Admin> structure = new ResponseStructure<>();
 
-	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin admin,int hid) {
-		Hotel hotel=hotelDao.getHotelById(hid);
+	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin admin, int hid) {
+		Hotel hotel = hotelDao.getHotelById(hid);
 		admin.setHotel(hotel);
 		Admin admin2 = adminDao.saveAdmin(admin);
 		if (admin2 != null) {
@@ -38,8 +38,8 @@ public class AdminService {
 		}
 		return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.CREATED);
 	}
-	
-	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(int aid,Admin admin) {
+
+	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(int aid, Admin admin) {
 		Admin admin2 = adminDao.getAdminById(aid);
 		admin.setHotel(admin2.getHotel());
 		if (admin2 != null) {
@@ -48,12 +48,11 @@ public class AdminService {
 			structure.setStatus(HttpStatus.CREATED.value());
 			structure.setData(adminDao.updatAdmin(admin));
 			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.CREATED);
-		}
-		else {
+		} else {
 			throw new AdminIdNotFoundException();
 		}
 	}
-	
+
 	public ResponseEntity<ResponseStructure<Admin>> deleteAdmin(int aid) {
 		Admin admin2 = adminDao.getAdminById(aid);
 		if (admin2 != null) {
@@ -61,12 +60,11 @@ public class AdminService {
 			structure.setStatus(HttpStatus.CREATED.value());
 			structure.setData(adminDao.deleteAdmin(admin2));
 			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.CREATED);
-		}
-		else {
+		} else {
 			throw new AdminIdNotFoundException();
 		}
 	}
-	
+
 	public ResponseEntity<ResponseStructure<Admin>> getAdminById(int aid) {
 		Admin admin2 = adminDao.getAdminById(aid);
 		if (admin2 != null) {
@@ -74,12 +72,11 @@ public class AdminService {
 			structure.setStatus(HttpStatus.CREATED.value());
 			structure.setData(admin2);
 			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.CREATED);
-		}
-		else {
+		} else {
 			throw new AdminIdNotFoundException();
 		}
 	}
-	
+
 	public ResponseEntity<ResponseStructure<Admin>> getAdminByEmail(String email) {
 		Admin admin2 = adminDao.getAdminByEmail(email);
 		if (admin2 != null) {
@@ -87,30 +84,37 @@ public class AdminService {
 			structure.setStatus(HttpStatus.CREATED.value());
 			structure.setData(admin2);
 			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.CREATED);
-		}
-		else {
+		} else {
 			throw new AdminEmailNotFoundException();
 
 		}
 	}
-	
+
 	public ResponseEntity<ResponseStructure<List<Admin>>> getAdmins() {
-		ResponseStructure<List<Admin>> responseStructure=new ResponseStructure<>();
-		if (adminDao.getAllAdmins()!=null) {
+		ResponseStructure<List<Admin>> responseStructure = new ResponseStructure<>();
+		if (adminDao.getAllAdmins() != null) {
 			responseStructure.setMessage("admins feted Successufully....");
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setData(adminDao.getAllAdmins());
 			return new ResponseEntity<ResponseStructure<List<Admin>>>(responseStructure, HttpStatus.CREATED);
-		}
-		else {
+		} else {
 			throw new AdminBodyNotFoundException();
 		}
 	}
-	
-	
-	
 
+	public ResponseEntity<ResponseStructure<Admin>> loginAdmin(String email, String password) {
+		Admin admin2 = adminDao.getAdminByEmail(email);
+		if (admin2.getAdmin_password().equals(password)) {
+			structure.setMessage("Admin Logged In Successufully....");
+			structure.setStatus(HttpStatus.OK.value());
+			structure.setData(admin2);
+			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.OK);
+		} else {
+			structure.setMessage("Enter Valid Email and Password....");
+			structure.setStatus(HttpStatus.BAD_REQUEST.value());
+			structure.setData(admin2);
+			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.BAD_REQUEST);
 
-
-
+		}
+	}
 }

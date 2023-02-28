@@ -51,4 +51,9 @@ public class AdminController {
 	public ResponseEntity<ResponseStructure<Admin>> getAdminByEmail(@RequestParam String email) {
 		return service.getAdminByEmail(email);
 	}	
+	
+	@GetMapping("/adminlogin")
+	public ResponseEntity<ResponseStructure<Admin>> loginAdmin(@RequestParam String email,@RequestParam String password){
+		return service.loginAdmin(email,password);
+	}
 }
