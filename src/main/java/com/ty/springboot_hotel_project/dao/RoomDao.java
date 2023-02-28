@@ -41,7 +41,7 @@ public class RoomDao {
 		return repository.findAll();
 	}
 
-	public Room getRoomByType(String room_type) {
+	public List<Room> getRoomByType(String room_type) {
 		if(repository.getRoomByType(room_type)!=null)
 		{
 			return repository.getRoomByType(room_type);
