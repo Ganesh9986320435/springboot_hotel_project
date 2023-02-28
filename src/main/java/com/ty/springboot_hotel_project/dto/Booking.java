@@ -3,7 +3,9 @@ package com.ty.springboot_hotel_project.dto;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +24,7 @@ public class Booking {
 	private String check_out_time;
 	private String no_of_people;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private Customer customer;
 
 	@OneToOne

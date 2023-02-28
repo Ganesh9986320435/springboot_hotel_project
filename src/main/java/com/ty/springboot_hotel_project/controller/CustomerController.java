@@ -17,7 +17,6 @@ import com.ty.springboot_hotel_project.service.CustomerService;
 import com.ty.springboot_hotel_project.util.ResponseStructure;
 
 
-
 @RestController
 public class CustomerController {
 
@@ -55,7 +54,7 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/customerlogin")
-	public ResponseEntity<ResponseStructure<Customer>> loginCustomer(String email,String password)
+	public ResponseEntity<ResponseStructure<Customer>> loginCustomer(@RequestParam String email,@RequestParam String password)
 	{
 		return service.loginCustomer(email,password);
 	}
