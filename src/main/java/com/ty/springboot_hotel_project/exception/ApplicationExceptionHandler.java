@@ -1,5 +1,6 @@
 package com.ty.springboot_hotel_project.exception;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -199,6 +200,16 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		ResponseStructure<String> structure = new ResponseStructure<>();
 		structure.setMessage(accessException.getMessage());
 		structure.setData(accessException.getLocalizedMessage());
+		structure.setStatus(HttpStatus.BAD_REQUEST.value());
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(ParseException.class)
+	public ResponseEntity<ResponseStructure<String>> ParseExceptionhandler(ParseException parseException)
+	{
+		ResponseStructure<String> structure = new ResponseStructure<>();
+		structure.setMessage(parseException.getMessage());
+		structure.setData(parseException.getLocalizedMessage());
 		structure.setStatus(HttpStatus.BAD_REQUEST.value());
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.BAD_REQUEST);
 	}

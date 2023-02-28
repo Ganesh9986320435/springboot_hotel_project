@@ -1,6 +1,9 @@
 package com.ty.springboot_hotel_project.service;
 
-import java.sql.Date;
+import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,32 +105,52 @@ public class BookingService {
 
 		}
 	}
-
-	public ResponseEntity<ResponseStructure<List<Room>>> getRoomsByCheckOutAndCheckIn(Date check_in, Date check_out) {
-		List<Booking> list = bookingDao.getAllBookings();
-		List<Room> list2 = new ArrayList<>();
-		List<Room> list3 = roomDao.getAllRooms();
-		for (Booking b : list) {
-			if (b.getRooms().getAvailability().equals("N")) {
-//				Booking b1=Repository.getBookingByCheckInByCustomer(check_in, b.getCheck_in_date(), b.getCheck_out_date());
-//				Booking b2=Repository.getBookingByCheckOutByCustomer(check_out, b.getCheck_in_date(), b.getCheck_out_date());
-//				if(b1==null&&b2==null)
-				{
-					list2.add(b.getRooms());
-				}
-
-			}
+	public ResponseEntity<ResponseStructure<List<Room>>> getRoomsByCheckOutAndCheckIn(String check_in, String check_out)  {
+		List<Room> sendList = new ArrayList<>();
+		List<Room> list = roomDao.getRoomByAvailability("Y");
+		for (Room r : list) {
+			sendList.add(r);
 		}
-		for (Room r : list3) {
-			if (r.getAvailability().equals("Y")) {
-				list2.add(r);
+		List<Booking> list2 = bookingDao.getAllBookings();
+		for (Booking b : list2) {
+			String rci = b.getCheck_in_date();
+			String rco = b.getCheck_out_date();
+			Date fdate;
+			try {
+				fdate = new SimpleDateFormat("YYYY-MM-DD").parse(rci);
+			} catch (ParseException e) {
+				fdate=new SimpleDateFormat().get2DigitYearStart();
+			}
+			Date tdate;
+			try {
+				tdate = new SimpleDateFormat("YYYY-MM-DD").parse(rco);
+			} catch (ParseException e) {
+				tdate=new SimpleDateFormat().get2DigitYearStart();
+			}
+
+			long t1 = fdate.getTime();
+			long t2 = tdate.getTime();
+
+			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+
+			if (t1 < t2) {
+				// 1 = 1000
+				int count = 0;
+				for (long i = t1; i <= t2; i += 86400000) {
+					if (f.format(i).equals(check_in) || f.format(i).equals(check_out))
+						count++;
+				}
+				if (count == 0) {
+					sendList.add(b.getRooms());
+				}
 			}
 		}
 		ResponseStructure<List<Room>> responseStructure = new ResponseStructure<>();
-		responseStructure.setMessage("Rooms fetched successfully by checkin and checkout date");
+		responseStructure.setMessage("Rooms feted Successufully....");
 		responseStructure.setStatus(HttpStatus.OK.value());
-		responseStructure.setData(list2);
+		responseStructure.setData(sendList);
 		return new ResponseEntity<ResponseStructure<List<Room>>>(responseStructure, HttpStatus.OK);
+
 	}
 
 }
