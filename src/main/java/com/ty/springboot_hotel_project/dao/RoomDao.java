@@ -28,20 +28,36 @@ public class RoomDao {
 	}
 
 	public Room getRoomById(int rid) {
-		return repository.findById(rid).get();
+		if(repository.findById(rid).isPresent())
+		{
+			return repository.findById(rid).get();
+
+		}
+		
+		return null;
 	}
 
 	public List<Room> getAllRooms() {
 		return repository.findAll();
 	}
 
-	public List<Room> getRoomByType(String room_type) {
-		return repository.getRoomByType(room_type);
-	}
+	public Room getRoomByType(String room_type) {
+		if(repository.getRoomByType(room_type)!=null)
+		{
+			return repository.getRoomByType(room_type);
+
+		}
+		
+		return null;	}
 
 	public Room getRoomByNo(String room_no) {
-		return repository.getRoomByNo(room_no);
-	}
+		if(repository.getRoomByNo(room_no)!=null)
+		{
+			return repository.getRoomByNo(room_no);
+
+		}
+		
+		return null;	}
 
 	public List<Room> getRoomByAvailability(String availability) {
 		return repository.getRoomByAvailability(availability);

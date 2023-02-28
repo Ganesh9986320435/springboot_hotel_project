@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.ty.springboot_hotel_project.dto.Customer;
 import com.ty.springboot_hotel_project.repository.CustomerRepository;
-
 @Repository
 public class CustomerDao {
 	@Autowired
@@ -27,15 +26,24 @@ public class CustomerDao {
 	}
 
 	public Customer getCustomerById(int cid) {
-		if (repository.findById(cid).isPresent())
+		if(repository.findById(cid).isPresent())
+		{
 			return repository.findById(cid).get();
-		else
-			return null;
-	}
 
-	public Customer getCustomerByEmail(String email) {
-		return repository.getCustomerByEmail(email);
+		}
+		
+		return null;
 	}
+	
+	public Customer getCustomerByEmail(String email)
+	{
+		if(repository.getCustomerByEmail(email)!=null)
+		{
+			return repository.getCustomerByEmail(email);
+
+		}
+		
+		return null;	}
 
 	public List<Customer> getAllCustomers() {
 		return repository.findAll();

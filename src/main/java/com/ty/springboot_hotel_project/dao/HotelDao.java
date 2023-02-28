@@ -28,7 +28,13 @@ public class HotelDao {
 	}
 
 	public Hotel getHotelById(int hid) {
-		return repository.findById(hid).get();
+		if(repository.findById(hid).isPresent())
+		{
+			return repository.findById(hid).get();
+
+		}
+		
+		return null;
 	}
 
 	public List<Hotel> getAllHotels() {
