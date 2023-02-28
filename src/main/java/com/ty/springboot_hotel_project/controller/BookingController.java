@@ -54,6 +54,12 @@ public class BookingController {
 	
 	@GetMapping("/bookingsbycheck")
 	public ResponseEntity<ResponseStructure<List<Room>>> getRoomsByCheckOutAndCheckIn(@RequestParam String check_in,@RequestParam String check_out){
-		return service.getRoomsByCheckOutAndCheckIn(check_in, check_out);
+		try {
+			return service.getRoomsByCheckOutAndCheckIn(check_in, check_out);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
