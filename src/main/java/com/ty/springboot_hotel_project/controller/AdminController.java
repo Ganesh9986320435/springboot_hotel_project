@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.springboot_hotel_project.dto.Admin;
+import com.ty.springboot_hotel_project.dto.Booking;
 import com.ty.springboot_hotel_project.service.AdminService;
 import com.ty.springboot_hotel_project.util.ResponseStructure;
 
@@ -55,5 +56,10 @@ public class AdminController {
 	@GetMapping("/adminlogin")
 	public ResponseEntity<ResponseStructure<Admin>> loginAdmin(@RequestParam String email,@RequestParam String password){
 		return service.loginAdmin(email,password);
+	}
+	
+	@PutMapping("/getbookings")
+	public ResponseEntity<ResponseStructure<List<Booking>>> getChekedOutBookings(){
+		return service.getChekedOutBookings();
 	}
 }
