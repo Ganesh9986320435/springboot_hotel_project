@@ -21,6 +21,14 @@ public class Booking {
 	private String check_in_time;
 	private String check_out_time;
 	private String no_of_people;
+	private String review;
+	public String getReview() {
+		return review;
+	}
+
+	public void setReview(String review) {
+		this.review = review;
+	}
 
 	@ManyToOne
 	private Customer customer;

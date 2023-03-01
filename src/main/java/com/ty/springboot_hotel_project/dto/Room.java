@@ -8,11 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 public class Room {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@GenericGenerator(name = "room_id",strategy = "com.ty.springboot_hotel_project.util.RoomIdGenerator")
+	@GeneratedValue(generator = "room_id")
+	private String room_id;
 	private String room_no;
 	private String room_type;
 	private String room_price;
@@ -34,12 +37,12 @@ public class Room {
 		this.availability = availability;
 	}
 
-	public int getId() {
-		return id;
+	public String getId() {
+		return room_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(String id) {
+		this.room_id = id;
 	}
 
 	public String getRoom_no() {

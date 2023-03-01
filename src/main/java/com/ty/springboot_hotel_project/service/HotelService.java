@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.ty.springboot_hotel_project.dao.BookingDao;
 import com.ty.springboot_hotel_project.dao.HotelDao;
+import com.ty.springboot_hotel_project.dto.Booking;
 import com.ty.springboot_hotel_project.dto.Hotel;
 import com.ty.springboot_hotel_project.exception.HotelBodyNotFoundException;
 import com.ty.springboot_hotel_project.exception.HotelIdNotFoundException;
@@ -18,6 +20,9 @@ public class HotelService {
 
 	@Autowired
 	private HotelDao hotelDao;
+	
+	@Autowired
+	private BookingDao bookingDao;
 
 	ResponseStructure<Hotel> structure = new ResponseStructure<>();
 
@@ -80,5 +85,23 @@ public class HotelService {
 			throw new HotelBodyNotFoundException();
 		}
 	}
+	
+	public ResponseEntity<ResponseStructure<Hotel>> updateHotelReview(int hid)
+	{
+		Hotel hotel=hotelDao.getHotelById(hid);
+		List<Booking> list=bookingDao.getAllBookings();
+		double count=0;
+		for(Booking b:list)
+		{
+			count+=Double.parseDouble(b.getReview());
+		}
+		hotel.setHotel_review(String.valueOf(count/list.size()));
+		structure.setMessage("Hotels updated by review Successufully....");
+		structure.setStatus(HttpStatus.FOUND.value());
+		structure.setData(hotel);
+		return new ResponseEntity<ResponseStructure<Hotel>>(structure, HttpStatus.FOUND);
+	}
+	
+	
 
 }
