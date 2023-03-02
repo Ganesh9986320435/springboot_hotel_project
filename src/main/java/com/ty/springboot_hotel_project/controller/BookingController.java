@@ -28,7 +28,7 @@ public class BookingController {
 	private BookingService service;
 
 	@PostMapping("/booking")
-	public ResponseEntity<ResponseStructure<Booking>> saveBooking(@RequestBody Booking booking,@RequestParam int cid, @RequestParam int rid) {
+	public ResponseEntity<ResponseStructure<Booking>> saveBooking(@RequestBody Booking booking,@RequestParam int cid, @RequestParam String rid) {
 		return service.saveBooking(booking,cid,rid);
 	}
 

@@ -24,8 +24,8 @@ public class AdminController {
 	private AdminService service;
 
 	@PostMapping("/admin")
-	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(@RequestBody Admin admin,@RequestParam int hid) {
-		return service.saveAdmin(admin,hid);
+	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(@RequestBody Admin admin, @RequestParam int hid) {
+		return service.saveAdmin(admin, hid);
 	}
 
 	@PutMapping("/admin")
@@ -47,19 +47,20 @@ public class AdminController {
 	public ResponseEntity<ResponseStructure<List<Admin>>> getAllAdmin() {
 		return service.getAdmins();
 	}
-	
+
 	@GetMapping("/adminbyemail")
 	public ResponseEntity<ResponseStructure<Admin>> getAdminByEmail(@RequestParam String email) {
 		return service.getAdminByEmail(email);
-	}	
-	
-	@GetMapping("/adminlogin")
-	public ResponseEntity<ResponseStructure<Admin>> loginAdmin(@RequestParam String email,@RequestParam String password){
-		return service.loginAdmin(email,password);
 	}
-	
-	@PutMapping("/getbookings")
-	public ResponseEntity<ResponseStructure<List<Booking>>> getChekedOutBookings(){
+
+	@GetMapping("/adminlogin")
+	public ResponseEntity<ResponseStructure<Admin>> loginAdmin(@RequestParam String email,
+			@RequestParam String password) {
+		return service.loginAdmin(email, password);
+	}
+
+	@GetMapping("/getcheckoutbookings")
+	public ResponseEntity<ResponseStructure<List<Booking>>> getChekedOutBookings() {
 		return service.getChekedOutBookings();
 	}
 }

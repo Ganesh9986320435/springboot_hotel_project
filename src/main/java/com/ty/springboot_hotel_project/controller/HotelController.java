@@ -47,4 +47,9 @@ public class HotelController {
 		return service.getAllHotel();
 	}
 
+	@PutMapping("/updatebyreview")
+	public ResponseEntity<ResponseStructure<Hotel>> updateByReview(int hid)
+	{
+		return service.updateHotelReview(hid);
+	}
 }

@@ -36,11 +36,11 @@ public class BookingService {
 
 	ResponseStructure<Booking> structure = new ResponseStructure<>();
 
-	public ResponseEntity<ResponseStructure<Booking>> saveBooking(Booking booking, int cid, int rid) {
+	public ResponseEntity<ResponseStructure<Booking>> saveBooking(Booking booking, int cid, String rid) {
 		Room room = roomDao.getRoomById(rid);
 		room.setAvailability("N");
 		Room room2=roomDao.updatRoom(room);
-		Customer customer = customerDao.getCustomerById(rid);
+		Customer customer = customerDao.getCustomerById(cid);
 		booking.setCustomer(customer);
 		booking.setRooms(room2);
 		Booking booking2 = bookingDao.saveBooking(booking);

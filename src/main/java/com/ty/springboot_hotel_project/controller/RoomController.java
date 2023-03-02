@@ -32,17 +32,17 @@ public class RoomController {
 	}
 
 	@PutMapping("/room")
-	public ResponseEntity<ResponseStructure<Room>> updateRoom(@RequestParam int rid, @RequestBody Room room) {
+	public ResponseEntity<ResponseStructure<Room>> updateRoom(@RequestParam String rid, @RequestBody Room room) {
 		return service.updateRoom(rid, room);
 	}
 
 	@DeleteMapping("/room")
-	public ResponseEntity<ResponseStructure<Room>> deleteRoom(@RequestParam int rid) {
+	public ResponseEntity<ResponseStructure<Room>> deleteRoom(@RequestParam String rid) {
 		return service.deleteRoom(rid);
 	}
 
 	@GetMapping("/room")
-	public ResponseEntity<ResponseStructure<Room>> getRoomById(@RequestParam int rid) {
+	public ResponseEntity<ResponseStructure<Room>> getRoomById(@RequestParam String rid) {
 		return service.getRoomById(rid);
 	}
 

@@ -42,7 +42,7 @@ public class RoomService {
 		return new ResponseEntity<ResponseStructure<Room>>(structure, HttpStatus.CREATED);
 	}
 
-	public ResponseEntity<ResponseStructure<Room>> updateRoom(int rid, Room room) {
+	public ResponseEntity<ResponseStructure<Room>> updateRoom(String rid, Room room) {
 		Room room2 = roomDao.getRoomById(rid);
 		if (room2 != null) {
 			room.setId(rid);
@@ -57,8 +57,8 @@ public class RoomService {
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<Room>> deleteRoom(int aid) {
-		Room room2 = roomDao.getRoomById(aid);
+	public ResponseEntity<ResponseStructure<Room>> deleteRoom(String rid) {
+		Room room2 = roomDao.getRoomById(rid);
 		if (room2 != null) {
 			structure.setMessage("Room deleted Successufully....");
 			structure.setStatus(HttpStatus.CREATED.value());
@@ -69,8 +69,8 @@ public class RoomService {
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<Room>> getRoomById(int aid) {
-		Room room2 = roomDao.getRoomById(aid);
+	public ResponseEntity<ResponseStructure<Room>> getRoomById(String rid) {
+		Room room2 = roomDao.getRoomById(rid);
 		if (room2 != null) {
 			structure.setMessage("Room fetched Successufully....");
 			structure.setStatus(HttpStatus.CREATED.value());

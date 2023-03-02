@@ -27,10 +27,10 @@ public class RoomDao {
 		return room;
 	}
 
-	public Room getRoomById(int rid) {
-		if(repository.findById(rid).isPresent())
+	public Room getRoomById(String rid) {
+		if(repository.getRoomById(rid)!=null)
 		{
-			return repository.findById(rid).get();
+			return repository.getRoomById(rid);
 
 		}
 		
