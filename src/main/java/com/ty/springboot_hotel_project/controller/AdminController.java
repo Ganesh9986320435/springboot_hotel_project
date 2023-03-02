@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.springboot_hotel_project.dto.Admin;
+import com.ty.springboot_hotel_project.dto.Booking;
 import com.ty.springboot_hotel_project.service.AdminService;
 import com.ty.springboot_hotel_project.util.ResponseStructure;
 
@@ -23,8 +24,8 @@ public class AdminController {
 	private AdminService service;
 
 	@PostMapping("/admin")
-	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(@RequestBody Admin admin,@RequestParam int hid) {
-		return service.saveAdmin(admin,hid);
+	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(@RequestBody Admin admin, @RequestParam int hid) {
+		return service.saveAdmin(admin, hid);
 	}
 
 	@PutMapping("/admin")
@@ -46,16 +47,20 @@ public class AdminController {
 	public ResponseEntity<ResponseStructure<List<Admin>>> getAllAdmin() {
 		return service.getAdmins();
 	}
-	
+
 	@GetMapping("/adminbyemail")
 	public ResponseEntity<ResponseStructure<Admin>> getAdminByEmail(@RequestParam String email) {
 		return service.getAdminByEmail(email);
-	}	
-	
-	@GetMapping("/adminlogin")
-	public ResponseEntity<ResponseStructure<Admin>> loginAdmin(@RequestParam String email,@RequestParam String password){
-		return service.loginAdmin(email,password);
 	}
 
-	
+	@GetMapping("/adminlogin")
+	public ResponseEntity<ResponseStructure<Admin>> loginAdmin(@RequestParam String email,
+			@RequestParam String password) {
+		return service.loginAdmin(email, password);
+	}
+
+	@GetMapping("/getcheckoutbookings")
+	public ResponseEntity<ResponseStructure<List<Booking>>> getChekedOutBookings() {
+		return service.getChekedOutBookings();
+	}
 }

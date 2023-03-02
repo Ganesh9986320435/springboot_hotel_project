@@ -106,7 +106,7 @@ public class BookingService {
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<List<Room>>> getRoomsByCheckOutAndCheckIn(String check_in, String check_out)
+	public ResponseEntity<ResponseStructure<List<Room>>> getRoomsByCheckOutAndCheckIn(String in, String out)
 			throws ParseException {
 		List<Room> sendList = new ArrayList<>();
 		List<Room> list = roomDao.getRoomByAvailability("Y");
@@ -121,18 +121,16 @@ public class BookingService {
 			Date d_from = new SimpleDateFormat("yyyy-MM-dd").parse(from);
 			Date d_to = new SimpleDateFormat("yyyy-MM-dd").parse(to);
 
-			// System.out.println(d_from.getTime());
-
 			long t1 = d_from.getTime();
 			long t2 = d_to.getTime();
 
 			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
 
 			if (t1 < t2) {
+
 				int count = 0;
-				// 1 = 1000
 				for (long i = t1; i <= t2; i += 86400000) {
-					if (f.format(i).equals(check_in) || f.format(i).equals(check_out))
+					if ((f.format(i)).equals(in) || (f.format(i)).equals(out))
 						count++;
 				}
 				if (count == 0) {

@@ -1,5 +1,7 @@
 package com.ty.springboot_hotel_project.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ty.springboot_hotel_project.dao.AdminDao;
+import com.ty.springboot_hotel_project.dao.BookingDao;
 import com.ty.springboot_hotel_project.dao.HotelDao;
 import com.ty.springboot_hotel_project.dto.Admin;
+import com.ty.springboot_hotel_project.dto.Booking;
 import com.ty.springboot_hotel_project.dto.Hotel;
 import com.ty.springboot_hotel_project.exception.AdminBodyNotFoundException;
 import com.ty.springboot_hotel_project.exception.AdminEmailNotFoundException;
@@ -24,6 +28,9 @@ public class AdminService {
 
 	@Autowired
 	private HotelDao hotelDao;
+	
+	@Autowired
+	private BookingDao bookingDao;
 
 	ResponseStructure<Admin> structure = new ResponseStructure<>();
 
@@ -117,4 +124,23 @@ public class AdminService {
 
 		}
 	}
+
+	public ResponseEntity<ResponseStructure<List<Booking>>> getChekedOutBookings() {
+		ResponseStructure<List<Booking>> structure = new ResponseStructure<>();
+		String cdate = LocalDate.now().toString();
+		List<Booking> list=bookingDao.getAllBookings();
+		List<Booking> newlist = new ArrayList<>();
+		for(Booking b:list) {
+			if(b.getCheck_out_date().equals(cdate))
+				newlist.add(b);
+		}
+		structure.setMessage("Todays Checkouts Fetched Successufully....");
+		structure.setStatus(HttpStatus.OK.value());
+		structure.setData(newlist);
+		return new ResponseEntity<ResponseStructure<List<Booking>>>(structure, HttpStatus.OK);
+
+		
+	}
+	
+
 }

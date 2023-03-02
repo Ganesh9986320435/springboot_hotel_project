@@ -106,7 +106,7 @@ public class CustomerService {
 		ResponseStructure<Customer> responseStructure=new ResponseStructure<>();
 		if(customer.getCustomer_password().equals(password)&&customer.getCustomer_role().equals("customer"))
 		{
-			responseStructure.setMessage("customers feted Successufully....");
+			responseStructure.setMessage("Customers Logged In Successufully....");
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setData(customer);
 			return new ResponseEntity<ResponseStructure<Customer>>(responseStructure, HttpStatus.OK);
