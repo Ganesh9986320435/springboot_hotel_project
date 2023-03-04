@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import lombok.Data;
 
@@ -12,11 +15,22 @@ public class Hotel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int hotel_id;
+	@NotBlank(message = "hotel name should not blank")
+	@NotNull(message = "hotel name should not be null")
 	private String hotel_name;
+	@NotBlank(message = "hotel adress should not blank")
+	@NotNull(message = "hotel address name should not be null")
 	private String hotel_address;
+	@NotBlank(message = "hotel gst should not blank")
+	@NotNull(message = "hotel gst should not be null")
 	private String hotel_gst;
+	@NotBlank(message = "hotel owner should not blank")
+	@NotNull(message = "hotel owner should not be null")
 	private String hotel_owner;
+	@NotBlank(message = "hotel manager should not blank")
+	@NotNull(message = "hotel manager should not be null")
 	private String hotel_manager;
+	@Pattern(regexp = "[1-5]")
 	private String hotel_review;
 	public int getHotel_id() {
 		return hotel_id;

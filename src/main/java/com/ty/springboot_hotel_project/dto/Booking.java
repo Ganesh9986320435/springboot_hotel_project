@@ -12,17 +12,35 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NotBlank(message = "check in should not blank")
+	@NotNull(message = "checkin should not be null")
+	@Pattern(regexp = "[0-9]{4}[/-][0-9]{2}[/-][0-9]{2}")
 	private String check_in_date;
-	private String check_out_date;
+	@NotBlank(message = "check out should not blank")
+	@NotNull(message = "checkout should not be null")
+	@Pattern(regexp = "[0-9]{4}[/-][0-9]{2}[/-][0-9]{2}")
+	private String check_out_date;	
+	@NotBlank(message = "checkin time should not blank")
+	@NotNull(message = "checkin time should not be null")
+	@Pattern(regexp = "[0-9]{2}[:][0-9]{2}")
 	private String check_in_time;
+	@NotBlank(message = "checkout time should not blank")
+	@NotNull(message = "checkout time should not be null")
+	@Pattern(regexp = "[0-9]{2}[:][0-9]{2}")
 	private String check_out_time;
+	@NotBlank(message = "no of people should not blank")
+	@NotNull(message = "no of people should not be null")
 	private String no_of_people;
+	@Pattern(regexp = "[1-5]")
 	private String review;
 	public String getReview() {
 		return review;

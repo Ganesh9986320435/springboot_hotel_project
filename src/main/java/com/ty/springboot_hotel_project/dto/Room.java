@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -16,11 +19,24 @@ public class Room {
 	@GenericGenerator(name = "room_id",strategy = "com.ty.springboot_hotel_project.util.RoomIdGenerator")
 	@GeneratedValue(generator = "room_id")
 	private String room_id;
+	@NotBlank(message = "room no should not blank")
+	@NotNull(message = "room no should not be null")
 	private String room_no;
+	@NotBlank(message = "roomtype should not blank")
+	@NotNull(message = "roomtype should not be null")
 	private String room_type;
+	@NotBlank(message = "roomprice should not blank")
+	@NotNull(message = "roomprice should not be null")
 	private String room_price;
+	@NotBlank(message = "no of beds should not blank")
+	@NotNull(message = "no of beds should not be null")
 	private String no_of_beds;
+	@NotBlank(message = "max no of people should not blank")
+	@NotNull(message = "max no of people should not be null")
 	private String max_no_of_people;
+	@NotBlank(message = "availibility should not blank")
+	@NotNull(message = "availablility should not be null")
+	@Pattern(regexp = "Y/N")
 	private String availability;
 	
 	@Enumerated(EnumType.STRING)

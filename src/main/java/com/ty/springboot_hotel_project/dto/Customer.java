@@ -4,18 +4,38 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int customer_id;
+	@NotBlank(message = "customer name should not blank")
+	@NotNull(message = "customer name should not be null")
 	private String customer_name;
+	@NotBlank(message = "customer address should not blank")
+	@NotNull(message = "customer address should not be null")
 	private String customer_address;
+	@NotBlank(message = "customer mail should not blank")
+	@NotNull(message = "customer mail should not be null")
+	@Pattern(regexp = "[a-zA-Z0-9_/-/.]+[@][a-z]+[/.][a-z]{2,3}")
 	private String customer_email;
+	@NotBlank(message = "customer pass should not blank")
+	@NotNull(message = "customer pass should not be null")
 	private String customer_password;
+	@NotBlank(message = "customer phone should not blank")
+	@NotNull(message = "customer phone should not be null")
+	@Pattern(regexp = "[6-9][0-9]{9}")
 	private String customer_phone;
+	@NotBlank(message = "customer role should not blank")
+	@NotNull(message = "customer role should not be null")
 	private String customer_role;
+	@NotBlank(message = "customer adhar should not blank")
+	@NotNull(message = "customer adhar should not be null")
+	@Pattern(regexp = "[1-9][1-9]{11)")
 	private String customer_aadharno;
 	public int getCustomer_id() {
 		return customer_id;

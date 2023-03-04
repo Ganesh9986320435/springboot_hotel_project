@@ -5,17 +5,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Admin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int admin_id;
+	@NotBlank(message = "admin name should not blank")
+	@NotNull(message = "admin name should not be null")
 	private String admin_name;
+	@NotBlank(message = "admin email should not blank")
+	@NotNull(message = "admin mail should not be null")
+	@Pattern(regexp = "[a-zA-Z0-9_/-/.]+[@][a-z]+[/.][a-z]{2,3}")
 	private String admin_email;
+	@NotBlank(message = "admin pass should not blank")
+	@NotNull(message = "admin pass should not be null")
 	private String admin_password;
+	@NotBlank(message = "admin role should not blank")
+	@NotNull(message = "admin role should not be null")
 	private String admin_role;
-
 	@OneToOne
 	private Hotel hotel;
 
