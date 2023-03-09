@@ -1,5 +1,6 @@
 package com.ty.springboot_hotel_project.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,6 +31,7 @@ public class Customer {
 	@NotBlank(message = "customer pass should not blank")
 	@NotNull(message = "customer pass should not be null")
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@Column(unique = true)
 	private String customer_password;
 	@NotBlank(message = "customer phone should not blank")
 	@NotNull(message = "customer phone should not be null")
@@ -42,6 +44,14 @@ public class Customer {
 	@NotNull(message = "customer adhar should not be null")
 	@Pattern(regexp = "[1-9][1-9]{11}")
 	private String customer_aadharno;
+	private int otp;
+	
+	public int getOtp() {
+		return otp;
+	}
+	public void setOtp(int otp) {
+		this.otp = otp;
+	}
 	public int getCustomer_id() {
 		return customer_id;
 	}

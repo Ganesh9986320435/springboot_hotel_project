@@ -85,6 +85,18 @@ public class CustomerController {
 	}
 	
 	
+	@PostMapping("/forgotpassword")
+	public String genarateOtp(@RequestParam String email) {
+		service.generateOtp(email);
+		return "OTP Sent";
+	}
+	
+	@PostMapping("/verifyotp")
+	public ResponseEntity<ResponseStructure<Customer>> verify(@RequestParam int otp,@RequestParam String email){
+		return service.verify(otp,email);
+	}
+	
+	
 	
 	
 	
