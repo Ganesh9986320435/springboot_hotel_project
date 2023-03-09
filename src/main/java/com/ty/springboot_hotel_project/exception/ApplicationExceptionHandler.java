@@ -163,7 +163,6 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-
 		List<ObjectError> error = ex.getAllErrors();
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		for (ObjectError er : error) {

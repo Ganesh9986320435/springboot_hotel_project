@@ -25,6 +25,5 @@ public class ApplicationConfig {
 		return new Docket(DocumentationType.SWAGGER_2).select()
 				.apis(RequestHandlerSelectors.basePackage("com.ty.springboot_hotel_project")).build().apiInfo(apiInfo)
 				.useDefaultResponseMessages(false);
-
 	}
 }

@@ -32,9 +32,7 @@ public class AdminDao {
 		if(repository.findById(aid).isPresent())
 		{
 			return repository.findById(aid).get();
-
 		}
-		
 		return null;
 	}
 

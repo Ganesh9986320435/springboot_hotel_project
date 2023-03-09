@@ -1,7 +1,6 @@
 package com.ty.springboot_hotel_project.util;
 
 public class ResponseStructure<T> {
-	
 	private String message ;
 	private int status;
 	private T data;

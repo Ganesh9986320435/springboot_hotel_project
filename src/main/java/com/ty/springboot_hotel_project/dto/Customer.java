@@ -8,6 +8,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Customer {
 	@Id
@@ -25,6 +29,7 @@ public class Customer {
 	private String customer_email;
 	@NotBlank(message = "customer pass should not blank")
 	@NotNull(message = "customer pass should not be null")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String customer_password;
 	@NotBlank(message = "customer phone should not blank")
 	@NotNull(message = "customer phone should not be null")
@@ -35,13 +40,13 @@ public class Customer {
 	private String customer_role;
 	@NotBlank(message = "customer adhar should not blank")
 	@NotNull(message = "customer adhar should not be null")
-	@Pattern(regexp = "[1-9][1-9]{11)")
+	@Pattern(regexp = "[1-9][1-9]{11}")
 	private String customer_aadharno;
 	public int getCustomer_id() {
 		return customer_id;
 	}
 	public void setCustomer_id(int customer_id) {
-		this.customer_id = customer_id;
+		this.customer_id = customer_id;	
 	}
 	public String getCustomer_name() {
 		return customer_name;

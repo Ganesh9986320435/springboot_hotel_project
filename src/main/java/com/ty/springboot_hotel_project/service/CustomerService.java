@@ -13,6 +13,7 @@ import com.ty.springboot_hotel_project.exception.BookingIdNotFoundException;
 import com.ty.springboot_hotel_project.exception.CustomerBodyNotFoundException;
 import com.ty.springboot_hotel_project.exception.CustomerEmailNotFoundException;
 import com.ty.springboot_hotel_project.exception.CustomerIdNotFoundException;
+import com.ty.springboot_hotel_project.util.Aes;
 import com.ty.springboot_hotel_project.util.ResponseStructure;
 
 @Service
@@ -21,9 +22,13 @@ public class CustomerService {
 	@Autowired
 	private CustomerDao customerDao;
 	
+	@Autowired
+	private Aes aes;
+	
 	ResponseStructure<Customer> structure = new ResponseStructure<>();
 
-	public ResponseEntity<ResponseStructure<Customer>> saveCustomer(Customer customer) {
+	public ResponseEntity<ResponseStructure<Customer>> saveCustomer(Customer customer){
+		customer.setCustomer_password(aes.encrypt(customer.getCustomer_password()));
 		Customer customer2 = customerDao.saveCustomer(customer);
 		if (customer2 != null) {
 			structure.setMessage("customer Saved Successufully....");
@@ -65,6 +70,7 @@ public class CustomerService {
 	public ResponseEntity<ResponseStructure<Customer>> getCustomerById(int cid) {
 		Customer customer2 = customerDao.getCustomerById(cid);
 		if (customer2 != null) {
+			customer2.setCustomer_password(aes.decrypt(customer2.getCustomer_password()));
 			structure.setMessage("customer fetched Successufully....");
 			structure.setStatus(HttpStatus.CREATED.value());
 			structure.setData(customer2);
