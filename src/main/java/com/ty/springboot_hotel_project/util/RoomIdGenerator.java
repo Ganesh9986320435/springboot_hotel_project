@@ -18,7 +18,7 @@ public class RoomIdGenerator implements IdentifierGenerator{
 		Connection connection=session.connection();
 		try {
 			Statement statement=connection.createStatement();
-			ResultSet resultSet=statement.executeQuery("select count(room_id) from Customer");
+			ResultSet resultSet=statement.executeQuery("select count(room_id) from Room");
 			if(resultSet.next()) {
 				int id=resultSet.getInt(1);
 				suffix=String.valueOf(id);
